@@ -18,10 +18,32 @@ class ToDoDetailsViewController: UIViewController {
     
     @IBOutlet weak var taskCompletionDate: UILabel!
     
+    var toDoItem: ToDoItemModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        taskTitleLabel.text = toDoItem.name
+        
+        taskDetailsTextView.text = toDoItem.details
+        
+        if toDoItem.isComplete {
+            disableButton()
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy hh:mm"
+        let taskDate = formatter.string(from: toDoItem.completionDate)
+        taskCompletionDate.text = taskDate
+        
     }
-
+    
+    func disableButton() {
+        taskCompletionButton.backgroundColor = UIColor.gray
+        taskCompletionButton.isSelected = true
+    }
+    
+    @IBAction func taskDidComplete(_ sender: Any) {
+    }
+    
 }

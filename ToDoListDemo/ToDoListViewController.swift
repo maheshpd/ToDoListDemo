@@ -26,11 +26,17 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         let testItem = ToDoItemModel(name: "Test Item", details: "Test Details", completionDate: Date())
         
         self.toDoItems.append(testItem)
+        
+        let tesstItem2 = ToDoItemModel(name: "Test Item2", details: "Test Details2", completionDate: Date())
+        
+        self.toDoItems.append(tesstItem2)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "TaskDetailsSegue", sender: nil)
+        let selectedItem = toDoItems[indexPath.row]
+        
+        performSegue(withIdentifier: "TaskDetailsSegue", sender: selectedItem)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,5 +55,19 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "TaskDetailsSegue" {
+            guard let detinationVC = segue.destination as? ToDoDetailsViewController else {return}
+            
+            guard let toDoItem = sender as? ToDoItemModel else {return}
+            
+            detinationVC.toDoItem = toDoItem
+            
+        }
+        
+    }
+    
     
 }
