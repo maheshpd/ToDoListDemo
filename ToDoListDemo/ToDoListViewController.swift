@@ -22,8 +22,17 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.tableFooterView = UIView()
         
         title = "To Do List"
+        
+        let testItem = ToDoItemModel(name: "Test Item", details: "Test Details", completionDate: Date())
+        
+        self.toDoItems.append(testItem)
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "TaskDetailsSegue", sender: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return toDoItems.count
