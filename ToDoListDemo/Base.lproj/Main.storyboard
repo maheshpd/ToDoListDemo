@@ -10,7 +10,7 @@
         <!--Add Task View Controller-->
         <scene sceneID="dnf-g5-EP8">
             <objects>
-                <viewController id="En9-BD-Try" customClass="AddTaskViewController" customModule="ToDoListDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="En9-BD-Try" customClass="AddTaskViewController" customModule="ToDoListDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zVo-R5-N1Z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,7 +59,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="cRQ-xs-UFU">
-                                                <rect key="frame" x="20" y="336" width="335" height="100"/>
+                                                <rect key="frame" x="20" y="335.5" width="335" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="0IH-ws-ui5"/>
                                                 </constraints>
@@ -135,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grM-wT-KMq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="410.39999999999998" y="-585.1574212893554"/>
+            <point key="canvasLocation" x="673" y="-681"/>
         </scene>
         <!--To Do List View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -189,6 +189,7 @@
                     <connections>
                         <outlet property="tableView" destination="n4S-ga-zP3" id="1Bj-AR-dTn"/>
                         <segue destination="L6W-Zm-gj3" kind="show" identifier="TaskDetailsSegue" id="AuV-Cu-sT1"/>
+                        <segue destination="En9-BD-Try" kind="presentation" identifier="AddTaskSegue" id="bU8-rS-EPs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
