@@ -41,6 +41,14 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         self.toDoItems.append(tesstItem2)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tableView.setEditing(false, animated: false)
+        
+    }
+    
+    
     @objc func addTapped() {
         performSegue(withIdentifier: "AddTaskSegue", sender: nil)
     }
@@ -63,6 +71,19 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         performSegue(withIdentifier: "TaskDetailsSegue", sender: toDoTuple)
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            
+            self.toDoItems.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+            
+        }
+        
+        return[delete]
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
