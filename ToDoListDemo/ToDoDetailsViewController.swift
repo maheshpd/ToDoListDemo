@@ -20,6 +20,10 @@ class ToDoDetailsViewController: UIViewController {
     
     var toDoItem: ToDoItemModel!
     
+    var toDoIndex: Int!
+    
+    weak var delegate: ToDoListDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +48,9 @@ class ToDoDetailsViewController: UIViewController {
     }
     
     @IBAction func taskDidComplete(_ sender: Any) {
+        toDoItem.isComplete = true
+        delegate?.update(task: toDoItem, index: toDoIndex)
+        disableButton()
     }
     
 }
