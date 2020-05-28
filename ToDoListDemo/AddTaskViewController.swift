@@ -96,11 +96,11 @@ class AddTaskViewController: UIViewController {
     }
     
     @objc func keyboardWasShown(notification: NSNotification) {
-        
+        view.addSubview(touchView)
     }
     
     @objc func keyboardWasHidden(notification: NSNotification) {
-        
+        touchView.removeFromSuperview()
     }
     
     @objc func dismissKeyboard() {
