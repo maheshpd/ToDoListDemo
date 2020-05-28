@@ -24,7 +24,22 @@ class AddTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let navigationItem = UINavigationItem(title: "Add Task")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonDidTouch))
+        
+        navigationBar.items = [navigationItem]
+        
+        taskDetailsTextView.layer.borderColor = UIColor.lightGray.cgColor
+        taskDetailsTextView.layer.borderWidth = CGFloat(1)
+        
+        taskDetailsTextView.layer.cornerRadius = CGFloat(3)
+        
     }
     
+    @objc func cancelButtonDidTouch() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func addTaskDidTouch(_ sender: Any) {
+    }
 }
