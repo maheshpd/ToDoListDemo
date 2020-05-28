@@ -70,6 +70,39 @@ class AddTaskViewController: UIViewController {
         taskDetailsTextView.inputAccessoryView = toolbarDone
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        registerForKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        deregisterFromKeyboardNotification()
+        
+    }
+    
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: UIWindow.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasHidden(notification:)), name: UIWindow.keyboardWillHideNotification, object: nil)
+    }
+    
+    func deregisterFromKeyboardNotification() {
+        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: UIWindow.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWasShown(notification: NSNotification) {
+        
+    }
+    
+    @objc func keyboardWasHidden(notification: NSNotification) {
+        
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
