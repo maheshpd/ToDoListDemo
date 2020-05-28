@@ -20,7 +20,22 @@ class AddTaskViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    
+    lazy var touchView: UIView = {
+        
+        let _touchView = UIView()
+       
+        _touchView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0)
+        
+        let touchViewTapped = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        
+        _touchView.addGestureRecognizer(touchViewTapped)
+        
+        _touchView.isUserInteractionEnabled = true
+        
+        _touchView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        return _touchView
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,6 +70,10 @@ class AddTaskViewController: UIViewController {
         taskDetailsTextView.inputAccessoryView = toolbarDone
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @objc func doneButtonTapped() {
         view.endEditing(true)
     }
@@ -66,4 +85,5 @@ class AddTaskViewController: UIViewController {
     
     @IBAction func addTaskDidTouch(_ sender: Any) {
     }
+    
 }
