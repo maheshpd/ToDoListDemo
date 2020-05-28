@@ -34,7 +34,31 @@ class AddTaskViewController: UIViewController {
         
         taskDetailsTextView.layer.cornerRadius = CGFloat(3)
         
+        let toolbarDone = UIToolbar.init()
+        
+        toolbarDone.sizeToFit()
+        
+        toolbarDone.barTintColor = UIColor.red
+        
+        toolbarDone.isTranslucent = false
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil)
+        
+        let barBtnDone = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped))
+        
+        barBtnDone.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17), NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        
+        toolbarDone.items = [flexSpace, barBtnDone, flexSpace]
+        
+        taskNameTextField.inputAccessoryView = toolbarDone
+        
+        taskDetailsTextView.inputAccessoryView = toolbarDone
     }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true)
+    }
+    
     
     @objc func cancelButtonDidTouch() {
         dismiss(animated: true, completion: nil)
