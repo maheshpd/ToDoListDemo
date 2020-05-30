@@ -36,6 +36,13 @@ class AddTaskViewController: UIViewController {
         
         return _touchView
     }()
+    
+    let toolbarDone = UIToolbar.init()
+    
+    var activeTextField: UITextField?
+    
+    var activeTextView: UITextView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,7 +56,7 @@ class AddTaskViewController: UIViewController {
         
         taskDetailsTextView.layer.cornerRadius = CGFloat(3)
         
-        let toolbarDone = UIToolbar.init()
+        
         
         toolbarDone.sizeToFit()
         
@@ -68,6 +75,10 @@ class AddTaskViewController: UIViewController {
         taskNameTextField.inputAccessoryView = toolbarDone
         
         taskDetailsTextView.inputAccessoryView = toolbarDone
+        
+        taskNameTextField.delegate = self
+        
+        taskDetailsTextView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,6 +108,24 @@ class AddTaskViewController: UIViewController {
     
     @objc func keyboardWasShown(notification: NSNotification) {
         view.addSubview(touchView)
+       
+        let info: NSDictionary = notification.userInfo! as NSDictionary
+        
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize!.height + toolbarDone.frame.size.height + 10.0), right: 0.0)
+        
+        self.scrollView.contentInset = contentInsets
+        
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        
+        var aRect: CGRect = UIScreen.main.bounds
+        
+        aRect.size.height -= aRect.size.height - keyboardSize!.height
+        
+        
+        
+        
     }
     
     @objc func keyboardWasHidden(notification: NSNotification) {
@@ -119,4 +148,25 @@ class AddTaskViewController: UIViewController {
     @IBAction func addTaskDidTouch(_ sender: Any) {
     }
     
+}
+
+extension AddTaskViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
+    }
+    
+}
+
+extension AddTaskViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        activeTextView = textView
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        activeTextView = nil
+    }
 }
